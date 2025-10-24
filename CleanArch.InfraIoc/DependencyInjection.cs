@@ -1,9 +1,14 @@
-﻿using CleanArch.Domain.Interfaces;
+﻿using AutoMapper;
+using CleanArch.Application.Interfaces;
+using CleanArch.Application.Mappings;
+using CleanArch.Application.Services;
+using CleanArch.Domain.Interfaces;
 using CleanArch.InfraData.Context;
 using CleanArch.InfraData.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace CleanArch.InfraIoc
 {
@@ -17,6 +22,11 @@ namespace CleanArch.InfraIoc
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
+            // Configuração do AutoMapper usando o pacote de extensão
+            services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 
             return services;
         }
