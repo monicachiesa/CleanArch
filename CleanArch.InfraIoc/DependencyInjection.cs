@@ -5,6 +5,7 @@ using CleanArch.Application.Services;
 using CleanArch.Domain.Interfaces;
 using CleanArch.InfraData.Context;
 using CleanArch.InfraData.Repositories;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,10 @@ namespace CleanArch.InfraIoc
 
             // Configuração do AutoMapper usando o pacote de extensão
             services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
+
+            //registra o serviço do mediatR
+            var myHandlers = AppDomain.CurrentDomain.Load("CleanArch.Application");
+            services.AddMediatR(myHandlers);
 
             return services;
         }

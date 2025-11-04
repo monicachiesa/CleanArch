@@ -20,10 +20,8 @@ namespace CleanArch.Domain.Entities
             ValidateDomain(name, description, price, stock, image);
         }
 
-        public void Update(int categoryId, string name, string description, decimal price, int stock, string image)
+        public void Update(string name, string description, decimal price, int stock, string image)
         {
-            DomainExceptionValidation.When(categoryId < 0, "Invalid id value");
-            CategoryId = categoryId;
             ValidateDomain(name, description, price, stock, image);
         }
 

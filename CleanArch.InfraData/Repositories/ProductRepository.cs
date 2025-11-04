@@ -4,6 +4,7 @@ using CleanArch.InfraData.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CleanArch.InfraData.Repositories
@@ -24,13 +25,7 @@ namespace CleanArch.InfraData.Repositories
 
         public async Task<Product> GetByIdAsync(int id)
         {
-            return await _context.Products.FindAsync(id);
-        }
-
-        public async Task<Product> GetProductCategoryAsync(int id)
-        {
-            return await _context.Products.Include(p => p.Category)
-                                          .SingleOrDefaultAsync(p => p.Id == id);
+            return await _context.Products.Include(c => c.Category).Where(p => p.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Product>> GetProductsAsync()

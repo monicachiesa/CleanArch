@@ -37,6 +37,8 @@ namespace CleanArch.WebUI
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
+            //pra usar os arquivos estáticos, precisa ser antes do roteamento e antes do autorization
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -47,7 +49,7 @@ namespace CleanArch.WebUI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Products}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
